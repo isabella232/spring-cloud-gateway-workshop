@@ -12,8 +12,8 @@
 
 
 #### Let's do this!
-* Getting logged in
-* Let's look at Limiting App
-* Let's look at SSO
-* Deploy "legacy" applications
+* [Getting logged in](GettingLoggedIn.md)
+* Let's look at rate limiting
+* Integrating with SSO
+* Deploy "legacy" Tanzu Bank applications
 *
