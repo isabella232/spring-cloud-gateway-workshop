@@ -2,6 +2,8 @@
 
 ## Prerequisites
 * [Installing the Spring Cloud Gateway Tile](InstallGatewayTile.md)
+* [Installing the Spring Cloud SSO Tile](InstallSSOTile.md)
+* Setup SSO Plan
 
 ## Getting Started
 
