@@ -15,4 +15,5 @@
 1. [Let's look at rate limiting](RateLimiting.md)
 1. [Integrating with SSO](IntegratingSSO.md)
 1. [Deploy "legacy" Tanzu Bank applications](DeployLegacyApp.md)
-1.
+1. [Modernize our "legacy" app with Spring Cloud Gateway](ModernizeApp.md)
+1. [Let's get this running locally](RunningLocally.md)
