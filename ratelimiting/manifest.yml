@@ -1,0 +1,7 @@
+---
+applications:
+- name: ratelimiting
+  command: node index.js
+  memory: 128M
+  env:
+    OPTIMIZE_MEMORY: true
