@@ -3,7 +3,6 @@
 ## Prerequisites
 * [Installing the Spring Cloud Gateway Tile](InstallGatewayTile.md)
 * [Installing the Spring Cloud SSO Tile](InstallSSOTile.md)
-* Setup SSO Plan
 
 ## Getting Started
 
@@ -13,9 +12,4 @@
 
 
 #### Let's do this!
-1. [Getting logged in](GettingLoggedIn.md)
-1. [Let's look at rate limiting](RateLimiting.md)
-1. [Integrating with SSO](IntegratingSSO.md)
-1. [Deploy "legacy" Tanzu Bank applications](DeployLegacyApp.md)
-1. [Modernize our "legacy" app with Spring Cloud Gateway](ModernizeApp.md)
-1. [Let's get this running locally](RunningLocally.md)
+Setting up [Jupyter BASH](https://github.com/takluyver/bash_kernel)
