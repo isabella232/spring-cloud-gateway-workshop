@@ -1,0 +1,6 @@
+---
+applications:
+  - name: custom-gateway
+    path: ./target/spring-cloud-gateway-sample-2.2.5.BUILD-SNAPSHOT.jar
+    services:
+      - gateway-redis

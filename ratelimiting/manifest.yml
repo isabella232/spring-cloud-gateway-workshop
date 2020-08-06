@@ -5,3 +5,6 @@ applications:
   memory: 128M
   env:
     OPTIMIZE_MEMORY: true
+  routes:
+    - route: ratelimiting.apps.internal
+    - route: ratelimiting.cfapps.pcf.cloud

@@ -1,0 +1,69 @@
+test:
+  #  hostport: httpbin.org:80
+  #  hostport: localhost:5000
+  #  uri: http://${test.hostport}
+  uri: http://httpbin.org:80
+
+
+spring:
+  jmx:
+    enabled: false
+  cloud:
+    gateway:
+      default-filters:
+#      - PrefixPath=/httpbin
+      - AddResponseHeader=X-Response-Default-Foo, Default-Bar
+
+      routes:
+      - id: requestratelimiter_route
+        uri: https://ratelimiting.cfapps.pcf.cloud/bucket
+        predicates:
+        - Path=/ratelimit/bucket
+        filters:
+          - RewritePath=/ratelimit/(?<segment>.*), /$\{segment}
+          - name: RequestRateLimiter
+            args:
+              key-resolver: "#{@userKeyResolver}"
+              redis-rate-limiter.replenishRate: 1
+              redis-rate-limiter.burstCapacity: 2
+#      routes:
+#      - id: test
+#        uri: https://google.com
+#        predicates:
+#          - Path=/test/**
+#        filters:
+#          - StripPrefix=1
+#          - name: RequestRateLimiter
+
+      # =====================================
+      # to run server
+      # $ wscat --listen 9000
+      # to run client
+      # $ wscat --connect ws://localhost:8080/echo
+
+#      - id: websocket_test
+#        uri: ws://localhost:9000
+#        order: 9000
+#        predicates:
+#        - Path=/echo
+#      # =====================================
+#      - id: default_path_to_httpbin
+#        uri: ${test.uri}
+#        order: 10000
+#        predicates:
+#        - Path=/**
+
+redis:
+  host: ${vcap.services.gateway-redis.credentials.host:localhost}
+  password: ${vcap.services.gateway-redis.credentials.password:""}
+  port: ${vcap.services.gateway-redis.credentials.port:6379}
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.http.server.reactive: DEBUG
+    org.springframework.web.reactive: DEBUG
+    reactor.ipc.netty: DEBUG
+    reactor.netty: DEBUG
+
+management.endpoints.web.exposure.include: '*'

@@ -1,2 +1,6 @@
 #!/usr/bin/env bash
-cf bind-service ratelimiting gateway-demo -c '{ "routes": [ { "path": "/ratelimiting/**", "filters": ["RateLimit=1,10s"] } ] }'
+cf bind-service ratelimiting ratelimit-gateway -c '{ "routes": [
+{ "uri": "lb://ratelimiting.apps.internal","path": "/ratelimiting/**" },
+{ "uri": "lb://ratelimiting.apps.internal/1persec","path": "/ratelimiting/1persec/**", "filters": ["RateLimit=1,1s"] },
+{ "uri": "lb://ratelimiting.apps.internal/10permin","path": "/ratelimiting/10permin/**", "filters": ["RateLimit=10,1m"] }
+] }'
