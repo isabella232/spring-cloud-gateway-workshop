@@ -1,0 +1,3 @@
+[submodule "animal-rescue"]
+	path = animal-rescue
+	url = https://github.com/spring-cloud-services-samples/animal-rescue.git
