@@ -20,12 +20,34 @@ spring:
         predicates:
         - Path=/ratelimit/bucket
         filters:
-          - RewritePath=/ratelimit/(?<segment>.*), /$\{segment}
-          - name: RequestRateLimiter
-            args:
-              key-resolver: "#{@userKeyResolver}"
-              redis-rate-limiter.replenishRate: 1
-              redis-rate-limiter.burstCapacity: 2
+#        - SetPath=/{segment}
+        - RewritePath=/ratelimit/(?<segment>.*), /$\{segment}
+        - name: RequestRateLimiter
+          args:
+            key-resolver: "#{@userKeyResolver}"
+            redis-rate-limiter.replenishRate: 1
+            redis-rate-limiter.burstCapacity: 2
+      - id: kitchensink
+        uri: https://ratelimiting.cfapps.pcf.cloud/nolimit
+        predicates:
+          - Path=/kitchensink
+        filters:
+          - RewritePath=/kitchensink/(?<segment>.*), /$\{segment}
+          - AddRequestHeader=X-Request-Foo, Bar
+          - AddRequestParameter=foo, bar
+          - AddResponseHeader=X-Response-Foo, Bar
+#          - PreserveHostHeader
+          - SetStatus=202
+      - id: redirectthings
+        uri: https://google.com
+        predicates:
+          - Path=/redirectme
+        filters:
+        - RedirectTo=302, https://google.com
+
+
+
+
 #      routes:
 #      - id: test
 #        uri: https://google.com
@@ -53,10 +75,10 @@ spring:
 #        predicates:
 #        - Path=/**
 
-redis:
-  host: ${vcap.services.gateway-redis.credentials.host:localhost}
-  password: ${vcap.services.gateway-redis.credentials.password:""}
-  port: ${vcap.services.gateway-redis.credentials.port:6379}
+#redis:
+#  host: ${vcap.services.gateway-redis.credentials.host:localhost}
+#  password: ${vcap.services.gateway-redis.credentials.password:""}
+#  port: ${vcap.services.gateway-redis.credentials.port:6379}
 
 logging:
   level:

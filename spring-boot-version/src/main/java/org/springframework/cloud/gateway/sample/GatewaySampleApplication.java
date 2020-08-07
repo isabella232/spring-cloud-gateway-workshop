@@ -66,10 +66,9 @@ public class GatewaySampleApplication {
 						f.addResponseHeader("X-AnotherHeader", "bazz"))
 					.uri(uri)
 				)
-//				.route(r -> r.r)
 				.route(r -> r.order(-1)
 //					.host("**.cfapps.pcf.cloud").and()
-						.path("/ratelimit/1persec")
+					.path("/ratelimit/1persec")
 					.filters(f -> f
 						.filter(new ThrottleGatewayFilter()
 						.setCapacity(10)
